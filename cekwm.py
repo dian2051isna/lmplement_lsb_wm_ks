@@ -17,10 +17,11 @@ def load_and_extract():
         wm = np.bitwise_and(img, 1) * 255 
         wm_extracted_img = Image.fromarray(np.uint8(wm))
 
-        max_width, max_height = 250, 250
-        wm_extracted_img.thumbnail((max_width, max_height))
+        max_width, max_height = wm_extracted_img.size
+        wm_preview = wm_extracted_img.copy()
+        wm_preview.thumbnail((max_width, max_height))
 
-        wm_img = ImageTk.PhotoImage(wm_extracted_img)
+        wm_img = ImageTk.PhotoImage(wm_preview)
         wm_label.config(image=wm_img)
         wm_label.image = wm_img
 

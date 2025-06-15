@@ -39,9 +39,11 @@ def embed_watermark():
     wm_bits = np.right_shift(wm_resized, 7)  # ambil bit MSB watermark (0 atau 1)
     result = np.bitwise_or(watermarked, wm_bits)
 
-    cv2.imwrite("hasil_watermarked.png", result)
-    show_image(result)
-    messagebox.showinfo("Berhasil", "Watermark disisipkan ke hasil_watermarked.png")
+    save_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png")], title="Simpan gambar hasil")
+    if save_path:
+        cv2.imwrite(save_path, result)
+        show_image(result)
+        messagebox.showinfo("Berhasil", f"Watermark disisipkan ke {save_path}")
 
 def show_image(img):
     # Tampilkan gambar di tkinter canvas
